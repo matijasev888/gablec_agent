@@ -1,7 +1,7 @@
 name: daily-run
 on:
   schedule:
-    - cron: "0 5 * * *"  # ~06:00 Zagreb
+    - cron: "0 6 * * *"  # ~06:00 Zagreb
   workflow_dispatch:
   push:
     paths:
@@ -18,6 +18,7 @@ jobs:
       EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
       EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
       EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 

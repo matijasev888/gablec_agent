@@ -12,6 +12,9 @@ from apify_client import ApifyClient
 from google import genai
 from pathlib import Path
 from dotenv import load_dotenv
+from slack_sdk import WebClient
+
+
 
 env_path = Path(__file__).parent / '.env'
 load_dotenv(dotenv_path=env_path)
@@ -25,6 +28,7 @@ EMAIL_SENDER = os.getenv("EMAIL_SENDER")
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 EMAIL_RECIPIENTS = os.getenv("EMAIL_RECIPIENTS", "").split(",")
 EMAIL_RECIPIENTS = [r.strip() for r in EMAIL_RECIPIENTS if r.strip()]
+SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 
 client_apify = ApifyClient(APIFY_TOKEN)
 client_gemini = genai.Client(api_key=GOOGLE_API_KEY)
@@ -231,6 +235,7 @@ def main():
     
     body = "\n".join(lines)
     
+    """
     email_sent = send_email(subject, body, EMAIL_SENDER, EMAIL_RECIPIENTS, EMAIL_PASSWORD)
     
     if email_sent:
@@ -246,7 +251,12 @@ def main():
             print(f"  {name}: No menu")
     
     return email_sent
+    """
 
+    slack_client = WebClient(token=SLACK_BOT_TOKEN)
+    slack_client.chat_postMessage(channel="#ponuda_gableca", text=body)
+
+    return True
 
 if __name__ == "__main__":
     try:
