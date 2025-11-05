@@ -1,15 +1,21 @@
 name: daily-run
 on:
   schedule:
-    - cron: "0 5 * * *"  # runs every day at 06:00 Zagreb (UTC+1)
+    - cron: "0 5 * * *"  # 06:00 Zagreb (UTC+1)
   workflow_dispatch:
+  push:
+    paths:
+      - "**/*.py"
+      - "pyproject.toml"
+      - "uv.lock"
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - run: pip install uv && uv pip install --system --no-cache .
+      - run: pip install uv
+      - run: uv pip install --system --no-cache .
       - run: python -m gablec_script.main
