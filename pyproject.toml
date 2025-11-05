@@ -1,0 +1,23 @@
+[project]
+name = "gablec-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "apify-client>=2.2.1",
+    "facebook-scraper>=0.2.59",
+    "google-api-python-client>=2.185.0",
+    "google-auth>=2.42.0",
+    "google-auth-httplib2>=0.2.0",
+    "google-auth-oauthlib>=1.2.2",
+    "google-genai>=1.46.0",
+    "httpx>=0.27.0",
+    "image>=1.5.33",
+    "ipykernel>=7.1.0",
+    "pillow>=11.0.0",
+    "python-dotenv>=1.2.1",
+    "pytz>=2025.2",
+    "pywin32>=311",
+    "requests>=2.32.5",
+]
