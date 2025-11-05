@@ -1,7 +1,7 @@
 name: daily-run
 on:
   schedule:
-    - cron: "0 6 * * *"  # ~06:00 Zagreb
+    - cron: "0 6 * * *"  # ~07:00 Zagreb
   workflow_dispatch:
   push:
     paths:
