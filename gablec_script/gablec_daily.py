@@ -254,7 +254,7 @@ def main():
     """
 
     slack_client = WebClient(token=SLACK_BOT_TOKEN)
-    slack_client.chat_postMessage(channel="#ponuda_gableca", text=body)
+    slack_client.chat_postMessage(channel="#ponuda_gableca", text=body, unfurl_links=False, unfurl_media=False,)
 
     return True
 
