@@ -8,9 +8,16 @@ on:
       - "**/*.py"
       - "pyproject.toml"
       - "uv.lock"
+
 jobs:
   run:
     runs-on: windows-latest
+    env:
+      APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
     steps:
       - uses: actions/checkout@v4
 
