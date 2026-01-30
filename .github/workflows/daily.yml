@@ -1,24 +1,19 @@
-name: daily-run
+name: daily-lunch-bot
 on:
   schedule:
-    - cron: "0 6 * * *"  # ~06:00 Zagreb
+    # 08:00 UTC = 10:00 Zagreb (summer) / 09:00 Zagreb (winter)
+    # Runs Mon-Fri only (weekdays when restaurants have lunch menus)
+    - cron: "0 8 * * 1-5"
   workflow_dispatch:
-  push:
-    paths:
-      - "**/*.py"
-      - "pyproject.toml"
-      - "uv.lock"
 
 jobs:
   run:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     env:
       APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
       GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-      EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
-      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-      EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
     steps:
       - uses: actions/checkout@v4
 
@@ -26,9 +21,11 @@ jobs:
         with:
           python-version: "3.13"
 
-      - run: pip install uv
-      - run: uv pip install --system --no-cache .
+      - name: Install dependencies
+        run: |
+          pip install uv
+          uv pip install --system --no-cache .
 
-      - name: run script
+      - name: Run lunch bot
         run: python main.py
         working-directory: gablec_script

@@ -9,58 +9,56 @@ load_dotenv(dotenv_path=env_path)
 from gablec_daily import main
 
 if __name__ == "__main__":
-    print("=" * 80)
-    print("GABLEC AGENT - Daily Lunch Menu Scraper")
-    print("=" * 80)
+    print("=" * 60)
+    print("GABLEC BOT - Daily Lunch Menu for Slack")
+    print("=" * 60)
     print()
     
+    # Validate configuration
     apify_token = os.getenv("APIFY_TOKEN")
     google_api_key = os.getenv("GOOGLE_API_KEY")
-    email_sender = os.getenv("EMAIL_SENDER")
-    email_password = os.getenv("EMAIL_PASSWORD")
-    email_recipients = os.getenv("EMAIL_RECIPIENTS", "").split(",")
-    email_recipients = [r.strip() for r in email_recipients if r.strip()]
+    slack_bot_token = os.getenv("SLACK_BOT_TOKEN")
+    slack_channel = os.getenv("SLACK_CHANNEL", "#ponuda_gableca")
     
     print("Configuration:")
-    print(f"  Apify Token: {'Set' if apify_token else 'Missing'}")
-    print(f"  Google API Key: {'Set' if google_api_key else 'Missing'}")
-    print(f"  Email Sender: {email_sender if email_sender else 'Missing'}")
-    print(f"  Email Password: {'Set' if email_password else 'Missing'}")
-    print(f"  Email Recipients: {len(email_recipients)} recipient(s)")
-    for i, recipient in enumerate(email_recipients, 1):
-        print(f"    {i}. {recipient}")
+    print(f"  Apify Token:      {'OK' if apify_token else 'MISSING'}")
+    print(f"  Google API Key:   {'OK' if google_api_key else 'MISSING'}")
+    print(f"  Slack Bot Token:  {'OK' if slack_bot_token else 'MISSING'}")
+    print(f"  Slack Channel:    {slack_channel}")
     print()
     
-    if not all([apify_token, google_api_key, email_sender, email_password]):
-        print("Error: Missing required configuration!")
-        print("Please set all required variables in .env file")
+    missing = []
+    if not apify_token:
+        missing.append("APIFY_TOKEN")
+    if not google_api_key:
+        missing.append("GOOGLE_API_KEY")
+    if not slack_bot_token:
+        missing.append("SLACK_BOT_TOKEN")
+    
+    if missing:
+        print(f"Error: Missing required environment variables: {', '.join(missing)}")
         sys.exit(1)
     
-    if not email_recipients:
-        print("Error: No email recipients configured!")
-        print("Please set EMAIL_RECIPIENTS in .env file")
-        sys.exit(1)
-    
-    print("=" * 80)
+    print("=" * 60)
     print()
     
     try:
         success = main()
         if success:
-            print("\n" + "=" * 80)
-            print("SUCCESS! Lunch menus sent to all recipients.")
-            print("=" * 80)
+            print("\n" + "=" * 60)
+            print("SUCCESS! Lunch menus posted to Slack.")
+            print("=" * 60)
             sys.exit(0)
         else:
-            print("\n" + "=" * 80)
-            print("WARNING: Script completed but email may not have been sent.")
-            print("=" * 80)
+            print("\n" + "=" * 60)
+            print("FAILED: Could not post to Slack.")
+            print("=" * 60)
             sys.exit(1)
     except KeyboardInterrupt:
         print("\n\nInterrupted by user")
         sys.exit(1)
     except Exception as e:
-        print(f"\n\nError: {e}")
+        print(f"\nError: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)
