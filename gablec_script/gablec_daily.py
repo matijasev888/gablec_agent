@@ -1,11 +1,13 @@
 import os
 import json
 import sys
+import time
 import httpx
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from apify_client import ApifyClient
 from google import genai
+from google.genai.errors import ClientError
 from pathlib import Path
 from dotenv import load_dotenv
 from slack_sdk import WebClient
@@ -115,10 +117,26 @@ def ask_gemini_for_all_posts(page_name: str, posts_data: list, today_date) -> di
         else:
             parts.append({"text": "(Nema slika)"})
     
-    resp = client_gemini.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=[{"role": "user", "parts": parts}],
-    )
+    # Retry logic for rate limiting (429 errors)
+    max_retries = 3
+    resp = None
+    for attempt in range(max_retries):
+        try:
+            resp = client_gemini.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=[{"role": "user", "parts": parts}],
+            )
+            break
+        except ClientError as e:
+            if e.status_code == 429 and attempt < max_retries - 1:
+                wait_time = 60 * (attempt + 1)  # 60s, 120s, 180s
+                print(f"Rate limited, waiting {wait_time}s before retry (attempt {attempt + 1}/{max_retries})...")
+                time.sleep(wait_time)
+                continue
+            raise
+    
+    if resp is None:
+        return {"has_today": False, "items": []}
     
     txt = (resp.text or "").strip()
     
@@ -321,9 +339,14 @@ def main():
         print(f"\nFetching: {page_url}")
         results[page_url] = fetch_facebook_posts(page_url, since_date)
     
-    # Process posts with Gemini AI
+    # Process posts with Gemini AI (with delays to avoid rate limiting)
     today_lunch = {}
-    for page_url, posts in results.items():
+    for idx, (page_url, posts) in enumerate(results.items()):
+        # Add delay between API calls to stay under rate limit (skip first)
+        if idx > 0:
+            print("Waiting 20s to avoid rate limiting...")
+            time.sleep(20)
+        
         display_name = posts[0]["page_name"] if posts and posts[0]["page_name"] else page_url.split("/")[-2]
         
         print(f"\nAnalyzing {display_name}...")
