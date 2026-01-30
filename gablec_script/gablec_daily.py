@@ -57,9 +57,11 @@ def download_all_images(media: list) -> list:
         try:
             r = httpx.get(url, timeout=10)
             if r.status_code == 200:
-                # Detect mime type from content-type header or URL
-                content_type = r.headers.get("content-type", "image/jpeg")
+                # Detect mime type from content-type header, with fallback
+                content_type = r.headers.get("content-type", "")
                 mime = content_type.split(";")[0].strip()
+                if not mime:
+                    mime = "image/jpeg"
                 images.append({
                     "bytes": r.content,
                     "mime": mime
@@ -238,7 +240,7 @@ def send_to_slack(today_lunch: dict, today_date, max_retries: int = 3) -> bool:
     
     for attempt in range(1, max_retries + 1):
         try:
-            response = slack_client.chat_postMessage(
+            slack_client.chat_postMessage(
                 channel=SLACK_CHANNEL,
                 text=fallback_text,
                 blocks=blocks,
