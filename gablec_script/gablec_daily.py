@@ -80,7 +80,7 @@ def to_local(dt_iso_utc: str) -> datetime:
     return dt.astimezone(TZ)
 
 
-def ask_gemini_for_all_posts(page_name: str, posts_data: list, today_date) -> dict:
+def ask_gemini_for_all_posts(page_name: str, posts_data: list, today_date, skip_images: bool = False) -> dict:
     """Use Gemini AI to analyze posts and extract today's menu."""
     if not posts_data:
         return {"has_today": False, "items": []}
@@ -102,6 +102,7 @@ def ask_gemini_for_all_posts(page_name: str, posts_data: list, today_date) -> di
         )}
     ]
     
+    has_images = False
     for idx, post in enumerate(posts_data, 1):
         parts.append({"text": f"\n--- Objava {idx} (objavljena: {post['posted_at_local']}) ---"})
         
@@ -110,14 +111,15 @@ def ask_gemini_for_all_posts(page_name: str, posts_data: list, today_date) -> di
         else:
             parts.append({"text": "Tekst: (nema teksta)"})
         
-        if post['images']:
+        if post['images'] and not skip_images:
+            has_images = True
             parts.append({"text": f"Slike ({len(post['images'])} komada):"})
             for img in post['images']:
                 parts.append({"inline_data": {"mime_type": img["mime"], "data": img["bytes"]}})
         else:
             parts.append({"text": "(Nema slika)"})
     
-    # Retry logic for rate limiting (429 errors)
+    # Retry logic for rate limiting (429 errors) and image errors
     max_retries = 3
     resp = None
     for attempt in range(max_retries):
@@ -128,11 +130,19 @@ def ask_gemini_for_all_posts(page_name: str, posts_data: list, today_date) -> di
             )
             break
         except ClientError as e:
-            if e.status_code == 429 and attempt < max_retries - 1:
+            error_str = str(e)
+            # Check for rate limit error (429)
+            is_rate_limit = "429" in error_str or "RESOURCE_EXHAUSTED" in error_str
+            if is_rate_limit and attempt < max_retries - 1:
                 wait_time = 60 * (attempt + 1)  # 60s, 120s, 180s
                 print(f"Rate limited, waiting {wait_time}s before retry (attempt {attempt + 1}/{max_retries})...")
                 time.sleep(wait_time)
                 continue
+            # Check for invalid image error (400) - retry without images
+            is_image_error = "400" in error_str and "INVALID_ARGUMENT" in error_str
+            if is_image_error and has_images and not skip_images:
+                print(f"Image processing failed for {page_name}, retrying without images...")
+                return ask_gemini_for_all_posts(page_name, posts_data, today_date, skip_images=True)
             raise
     
     if resp is None:
