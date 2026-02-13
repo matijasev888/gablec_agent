@@ -3,7 +3,7 @@ on:
   schedule:
     # 08:00 UTC = 10:00 Zagreb (summer) / 09:00 Zagreb (winter)
     # Runs Mon-Fri only (weekdays when restaurants have lunch menus)
-    - cron: "0 8 * * 1-5"
+    - cron: "0 6 * * 1-5"
   workflow_dispatch:
 
 jobs:
