@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:apify.com)",
+      "WebSearch",
+      "WebFetch(domain:use-apify.com)"
+    ]
+  }
+}

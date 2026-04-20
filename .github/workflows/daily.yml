@@ -1,10 +1,24 @@
 name: daily-lunch-bot
+
 on:
   schedule:
-    # 08:00 UTC = 10:00 Zagreb (summer) / 09:00 Zagreb (winter)
-    # Runs Mon-Fri only (weekdays when restaurants have lunch menus)
-    - cron: "0 8 * * 1-5"
+    # Scrape & Process: 06:00 UTC = 07:00 Zagreb (winter) / 08:00 Zagreb (summer)
+    - cron: "0 6 * * 1-5"
+    
+    # Send Slack message: 07:00 UTC = 08:00 Zagreb (winter) / 09:00 Zagreb (summer)  
+    - cron: "0 7 * * 1-5"
+  
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Run mode'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+          - scrape
+          - send
+          - full
 
 jobs:
   run:
@@ -14,6 +28,7 @@ jobs:
       GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
+    
     steps:
       - uses: actions/checkout@v4
 
@@ -21,11 +36,45 @@ jobs:
         with:
           python-version: "3.13"
 
+      # Restore cached menu data from previous runs
+      - name: Restore menu cache
+        uses: actions/cache/restore@v4
+        with:
+          path: menu_cache.json
+          key: menu-cache-${{ hashFiles('gablec_script/gablec_daily.py') }}
+          restore-keys: |
+            menu-cache-
+
       - name: Install dependencies
         run: |
           pip install uv
           uv pip install --system --no-cache .
 
+      # Determine run mode based on schedule or manual input
+      - name: Determine run mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" == "0 6 * * 1-5" ]; then
+            echo "mode=scrape" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" == "0 7 * * 1-5" ]; then
+            echo "mode=send" >> $GITHUB_OUTPUT
+          else
+            echo "mode=full" >> $GITHUB_OUTPUT
+          fi
+          echo "Detected mode: $(cat $GITHUB_OUTPUT | grep mode | cut -d= -f2)"
+
       - name: Run lunch bot
-        run: python main.py
+        run: |
+          echo "Running in mode: ${{ steps.mode.outputs.mode }}"
+          python main.py --mode ${{ steps.mode.outputs.mode }}
         working-directory: gablec_script
+
+      # Save cache after scrape (only if scrape ran)
+      - name: Save menu cache
+        if: steps.mode.outputs.mode == 'scrape' || steps.mode.outputs.mode == 'full'
+        uses: actions/cache/save@v4
+        with:
+          path: menu_cache.json
+          key: menu-cache-${{ github.run_id }}
