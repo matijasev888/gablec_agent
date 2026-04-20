@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, date
 from zoneinfo import ZoneInfo
 from apify_client import ApifyClient
 from google import genai
-from google.genai.errors import ClientError
+from google.genai.errors import ClientError, ServerError
 from pathlib import Path
 from dotenv import load_dotenv
 from slack_sdk import WebClient
@@ -192,10 +192,17 @@ def ask_gemini_for_weekly_menu(page_name: str, posts_data: list, today_date: dat
     for attempt in range(max_retries):
         try:
             resp = client_gemini.models.generate_content(
-                model="gemini-2.5-flash",
+                model="gemini-2.0-flash",
                 contents=[{"role": "user", "parts": parts}],
             )
             break
+        except ServerError as e:
+            if attempt < max_retries - 1:
+                wait_time = 60 * (attempt + 1)
+                print(f"Server error ({e}), waiting {wait_time}s before retry (attempt {attempt + 1}/{max_retries})...")
+                time.sleep(wait_time)
+                continue
+            raise
         except ClientError as e:
             error_str = str(e)
             is_rate_limit = "429" in error_str or "RESOURCE_EXHAUSTED" in error_str
@@ -479,16 +486,14 @@ def scrape_and_process():
         print(f"Menu type: {result.get('menu_type', 'none')}")
         print(f"Days with menus: {list(result.get('menus', {}).keys())}")
         
-        # Update cache
+        # Update cache and save after each restaurant so partial progress isn't lost
         cache["restaurants"][display_name] = {
             "facebook_url": page_url,
             "last_scrape": now_local.isoformat(),
             "menu_type": result.get("menu_type", "none"),
             "menus": result.get("menus", {})
         }
-    
-    # Save cache
-    save_cache(cache)
+        save_cache(cache)
     
     print("\n" + "=" * 60)
     print("SCRAPE & PROCESS COMPLETE")
