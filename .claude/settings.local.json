@@ -5,7 +5,8 @@
       "WebSearch",
       "WebFetch(domain:use-apify.com)",
       "Bash(python *)",
-      "Bash(.venv/Scripts/python *)"
+      "Bash(.venv/Scripts/python *)",
+      "Bash(../.venv/Scripts/python main.py --mode scrape)"
     ]
   }
 }

@@ -170,52 +170,51 @@ def ask_gemini_for_weekly_menu(page_name: str, posts_data: list, today_date: dat
     ]
     
     has_images = False
+    total_image_bytes = 0
+    image_count = 0
     for idx, post in enumerate(posts_data, 1):
         parts.append({"text": f"\n--- Objava {idx} (objavljena: {post['posted_at_local']}) ---"})
-        
+
         if post['text']:
             parts.append({"text": f"Tekst: {post['text']}"})
         else:
             parts.append({"text": "Tekst: (nema teksta)"})
-        
+
         if post['images'] and not skip_images:
             has_images = True
             parts.append({"text": f"Slike ({len(post['images'])} komada):"})
             for img in post['images']:
+                total_image_bytes += len(img["bytes"])
+                image_count += 1
                 parts.append({"inline_data": {"mime_type": img["mime"], "data": img["bytes"]}})
         else:
             parts.append({"text": "(Nema slika)"})
-    
-    # Retry logic for rate limiting (429 errors) and image errors
-    max_retries = 3
+
+    # Debug: log request size
+    text_size = sum(len(p.get("text", "").encode("utf-8")) for p in parts if "text" in p)
+    print(f"  Request stats: {len(posts_data)} posts, {image_count} images, "
+          f"text={text_size/1024:.1f}KB, images={total_image_bytes/1024/1024:.1f}MB, "
+          f"total={( text_size + total_image_bytes)/1024/1024:.1f}MB")
+
+    # Try models in order — switch immediately on failure
+    models_to_try = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"]
     resp = None
-    for attempt in range(max_retries):
+    for model_name in models_to_try:
         try:
             resp = client_gemini.models.generate_content(
-                model="gemini-2.5-flash",
+                model=model_name,
                 contents=[{"role": "user", "parts": parts}],
             )
+            print(f"  Success with {model_name}")
             break
-        except ServerError as e:
-            if attempt < max_retries - 1:
-                wait_time = 60 * (attempt + 1)
-                print(f"Server error ({e}), waiting {wait_time}s before retry (attempt {attempt + 1}/{max_retries})...")
-                time.sleep(wait_time)
-                continue
-            raise
-        except ClientError as e:
+        except (ServerError, ClientError) as e:
             error_str = str(e)
-            is_rate_limit = "429" in error_str or "RESOURCE_EXHAUSTED" in error_str
-            if is_rate_limit and attempt < max_retries - 1:
-                wait_time = 60 * (attempt + 1)
-                print(f"Rate limited, waiting {wait_time}s before retry (attempt {attempt + 1}/{max_retries})...")
-                time.sleep(wait_time)
-                continue
             is_image_error = "400" in error_str and "INVALID_ARGUMENT" in error_str
             if is_image_error and has_images and not skip_images:
-                print(f"Image processing failed for {page_name}, retrying without images...")
+                print(f"  Image processing failed for {page_name}, retrying without images...")
                 return ask_gemini_for_weekly_menu(page_name, posts_data, today_date, skip_images=True)
-            raise
+            print(f"  {model_name} failed: {e}")
+            continue
     
     if resp is None:
         return {"menu_type": "none", "menus": {}}
