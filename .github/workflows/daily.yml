@@ -2,12 +2,9 @@ name: daily-lunch-bot
 
 on:
   schedule:
-    # Scrape & Process: 06:00 UTC = 07:00 Zagreb (winter) / 08:00 Zagreb (summer)
+    # 08:00 UTC = 10:00 Zagreb (summer) / 09:00 Zagreb (winter)
+    # Runs Mon-Fri only (weekdays when restaurants have lunch menus)
     - cron: "0 6 * * 1-5"
-    
-    # Send Slack message: 07:00 UTC = 08:00 Zagreb (winter) / 09:00 Zagreb (summer)  
-    - cron: "0 7 * * 1-5"
-  
   workflow_dispatch:
     inputs:
       mode:
