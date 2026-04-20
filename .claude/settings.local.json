@@ -3,7 +3,9 @@
     "allow": [
       "WebFetch(domain:apify.com)",
       "WebSearch",
-      "WebFetch(domain:use-apify.com)"
+      "WebFetch(domain:use-apify.com)",
+      "Bash(python *)",
+      "Bash(.venv/Scripts/python *)"
     ]
   }
 }

@@ -192,7 +192,7 @@ def ask_gemini_for_weekly_menu(page_name: str, posts_data: list, today_date: dat
     for attempt in range(max_retries):
         try:
             resp = client_gemini.models.generate_content(
-                model="gemini-2.0-flash",
+                model="gemini-2.5-flash",
                 contents=[{"role": "user", "parts": parts}],
             )
             break
