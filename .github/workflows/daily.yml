@@ -2,7 +2,7 @@ name: daily-lunch-bot
 
 on:
   schedule:
-    # 08:00 UTC = 10:00 Zagreb (summer) / 09:00 Zagreb (winter)
+    # 06:00 UTC = 08:00 Zagreb (summer) / 07:00 Zagreb (winter)
     # Runs Mon-Fri only (weekdays when restaurants have lunch menus)
     - cron: "0 6 * * 1-5"
   workflow_dispatch:
@@ -54,9 +54,7 @@ jobs:
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             echo "mode=${{ inputs.mode }}" >> $GITHUB_OUTPUT
           elif [ "${{ github.event.schedule }}" == "0 6 * * 1-5" ]; then
-            echo "mode=scrape" >> $GITHUB_OUTPUT
-          elif [ "${{ github.event.schedule }}" == "0 7 * * 1-5" ]; then
-            echo "mode=send" >> $GITHUB_OUTPUT
+            echo "mode=full" >> $GITHUB_OUTPUT
           else
             echo "mode=full" >> $GITHUB_OUTPUT
           fi
