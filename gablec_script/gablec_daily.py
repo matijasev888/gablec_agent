@@ -442,8 +442,9 @@ def scrape_and_process():
         found_cached = False
         for cached_name, cached_data in cache.get("restaurants", {}).items():
             if cached_data.get("facebook_url") == page_url:
-                # Check if we have today's menu
-                if get_cached_menu_for_today(cache, cached_name, today_local) is not None:
+                # A non-empty menu for today counts as cached; an empty list
+                # means Gemini found nothing, so keep retrying this restaurant.
+                if get_cached_menu_for_today(cache, cached_name, today_local):
                     print(f"[CACHED] {cached_name} - already have menu for today")
                     found_cached = True
                     break
