@@ -499,6 +499,44 @@ def scrape_and_process():
     print("=" * 60)
 
 
+def build_today_lunch(cache: dict, today_date: date) -> dict:
+    """Build the per-restaurant menu dict for today from the cache.
+
+    Returns {display_name: {"restaurant", "items", "facebook_url"}} with one
+    entry per page in FACEBOOK_PAGES. Restaurants not present in the cache get
+    an empty item list.
+    """
+    today_str = today_date.isoformat()
+    today_lunch = {}
+
+    for page_url in FACEBOOK_PAGES:
+        found = False
+        for restaurant_name, restaurant_data in cache.get("restaurants", {}).items():
+            if restaurant_data.get("facebook_url") == page_url:
+                menus = restaurant_data.get("menus", {})
+                today_lunch[restaurant_name] = {
+                    "restaurant": restaurant_name,
+                    "items": menus.get(today_str, []),
+                    "facebook_url": page_url,
+                }
+                found = True
+                break
+        if not found:
+            url_name = page_url.rstrip('/').split('/')[-1]
+            today_lunch[url_name] = {
+                "restaurant": url_name,
+                "items": [],
+                "facebook_url": page_url,
+            }
+
+    return today_lunch
+
+
+def count_ready_restaurants(today_lunch: dict) -> int:
+    """Number of restaurants with a non-empty menu for today."""
+    return sum(1 for info in today_lunch.values() if info["items"])
+
+
 def decide_send_action(ready_count: int, total: int, final: bool, already_sent: bool) -> str:
     """Pure decision for the send phase.
 
