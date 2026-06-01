@@ -633,9 +633,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Gablec Daily Bot")
     parser.add_argument(
         "--mode",
-        choices=["scrape", "send", "full"],
+        choices=["scrape", "send", "send-final", "full"],
         default="full",
-        help="Run mode: 'scrape' for fetching/processing, 'send' for Slack message, 'full' for both"
+        help="Run mode: 'scrape', 'send' (early), 'send-final' (deadline), 'full'"
     )
     args = parser.parse_args()
     
@@ -643,8 +643,8 @@ if __name__ == "__main__":
         if args.mode == "scrape":
             scrape_and_process()
             sys.exit(0)
-        elif args.mode == "send":
-            success = send_daily_message()
+        elif args.mode in ("send", "send-final"):
+            success = send_daily_message(final=(args.mode == "send-final"))
             sys.exit(0 if success else 1)
         else:  # full
             success = main()
