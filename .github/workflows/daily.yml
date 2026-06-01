@@ -76,8 +76,16 @@ jobs:
           if git diff --quiet -- menu_cache.json; then
             echo "No cache changes to commit."
           else
-            git pull --rebase --autostash origin "${{ github.ref_name }}" || true
+            # Commit our clean change first, so a conflicted file is never staged.
             git add menu_cache.json
             git commit -m "chore: update menu cache [skip ci]"
-            git push
+            # Push; if the remote moved (e.g. a manual push), rebase our commit
+            # and retry once. Abort cleanly on conflict rather than pushing
+            # corrupt JSON; the next scheduled run rebuilds the cache.
+            if ! git push; then
+              echo "Push rejected; rebasing on remote and retrying."
+              git pull --rebase origin "${{ github.ref_name }}" \
+                || { echo "Rebase conflict; aborting (cache will be rebuilt next run)."; git rebase --abort 2>/dev/null; exit 1; }
+              git push
+            fi
           fi
