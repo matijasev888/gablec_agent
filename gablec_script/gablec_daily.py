@@ -555,69 +555,67 @@ def decide_send_action(ready_count: int, total: int, final: bool, already_sent: 
     return "post" if ready_count >= 1 else "skip_empty"
 
 
-def send_daily_message():
+def send_daily_message(final: bool = False, today: date | None = None) -> bool:
     """
-    Phase 2: Send Slack message with today's menus from cache.
-    Run at 8:00 Zagreb time.
+    Send Slack message with today's menus from cache.
+
+    Send #1 (final=False, ~08:00 local): posts only when ALL restaurants are
+    ready; otherwise defers (returns True, no post).
+    Send #2 (final=True, ~09:30 deadline): posts whatever is ready; if all are
+    empty it skips and logs a warning. The cache 'sent_date' guard prevents
+    double-posting.
+
+    Returns False only on an actual Slack send failure.
     """
     now_local = datetime.now(TZ)
-    today_local = now_local.date()
+    today_local = today or now_local.date()
     today_str = today_local.isoformat()
-    
-    print(f"=== SEND SLACK MESSAGE - {today_local.isoformat()} ===")
+
+    label = "Send #2 (deadline)" if final else "Send #1"
+    print(f"=== {label} - {today_str} ===")
     print(f"Day: {CROATIAN_DAYS.get(today_local.weekday(), '')}")
     print("=" * 60)
-    
-    # Check if it's weekend
+
     if today_local.weekday() >= 5:
         print("Weekend - skipping Slack message.")
         return True
-    
-    # Load cache
+
     cache = load_cache()
-    
+
+    if cache.get("sent_date") == today_str:
+        print(f"Already sent today ({today_str}) - skipping.")
+        return True
+
     if not is_cache_valid_for_week(cache, today_local):
         print("WARNING: Cache is from a different week!")
-    
-    # Build today's lunch menu from cache
-    today_lunch = {}
-    
-    for page_url in FACEBOOK_PAGES:
-        # Find restaurant in cache
-        found = False
-        for restaurant_name, restaurant_data in cache.get("restaurants", {}).items():
-            if restaurant_data.get("facebook_url") == page_url:
-                menus = restaurant_data.get("menus", {})
-                today_menu = menus.get(today_str, [])
-                
-                today_lunch[restaurant_name] = {
-                    "restaurant": restaurant_name,
-                    "items": today_menu,
-                    "facebook_url": page_url
-                }
-                found = True
-                break
-        
-        if not found:
-            # Restaurant not in cache - show as missing
-            url_name = page_url.rstrip('/').split('/')[-1]
-            today_lunch[url_name] = {
-                "restaurant": url_name,
-                "items": [],
-                "facebook_url": page_url
-            }
-    
-    # Print summary
+
+    today_lunch = build_today_lunch(cache, today_local)
+    ready_count = count_ready_restaurants(today_lunch)
+    total = len(FACEBOOK_PAGES)
+
     print("\nMENU SUMMARY:")
     for name, info in today_lunch.items():
         status = f"{len(info['items'])} items" if info["items"] else "No menu"
         print(f"  {name}: {status}")
-    
-    # Send to Slack
+    print(f"Ready: {ready_count}/{total}")
+
+    action = decide_send_action(ready_count, total, final, already_sent=False)
+
+    if action == "defer":
+        print(f"Only {ready_count}/{total} ready - deferring to the 09:30 deadline send.")
+        return True
+    if action == "skip_empty":
+        print("WARNING: all restaurants empty at the deadline - not posting.")
+        return True
+
+    # action == "post"
     print("\n" + "=" * 60)
     print(f"Sending to Slack channel: {SLACK_CHANNEL}")
-    
-    return send_to_slack(today_lunch, today_local)
+    success = send_to_slack(today_lunch, today_local)
+    if success:
+        cache["sent_date"] = today_str
+        save_cache(cache)
+    return success
 
 
 def main():

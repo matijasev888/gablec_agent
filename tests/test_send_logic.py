@@ -60,3 +60,95 @@ def test_count_ready_restaurants_ignores_empty_lists():
         "C": {"items": ["y", "z"], "facebook_url": "u3"},
     }
     assert gd.count_ready_restaurants(lunch) == 2
+
+
+class _SaveSpy:
+    def __init__(self):
+        self.saved = None
+
+    def __call__(self, cache):
+        self.saved = cache
+
+
+def _setup_send(monkeypatch, cache, slack_result=True):
+    """Wire FACEBOOK_PAGES, load_cache, save_cache, send_to_slack for a send test."""
+    monkeypatch.setattr(gd, "FACEBOOK_PAGES", ["https://a/", "https://b/", "https://c/"])
+    monkeypatch.setattr(gd, "load_cache", lambda: cache)
+    spy = _SaveSpy()
+    monkeypatch.setattr(gd, "save_cache", spy)
+    sent = {"called": False}
+
+    def fake_slack(today_lunch, today_date, max_retries=3):
+        sent["called"] = True
+        return slack_result
+
+    monkeypatch.setattr(gd, "send_to_slack", fake_slack)
+    return spy, sent
+
+
+def _full_cache():
+    return {
+        "week_start": "2026-06-01",
+        "restaurants": {
+            "A": {"facebook_url": "https://a/", "menus": {"2026-06-01": ["a1"]}},
+            "B": {"facebook_url": "https://b/", "menus": {"2026-06-01": ["b1"]}},
+            "C": {"facebook_url": "https://c/", "menus": {"2026-06-01": ["c1"]}},
+        },
+    }
+
+
+MONDAY = date(2026, 6, 1)
+
+
+def test_send1_posts_when_all_ready(monkeypatch):
+    spy, sent = _setup_send(monkeypatch, _full_cache())
+    assert gd.send_daily_message(final=False, today=MONDAY) is True
+    assert sent["called"] is True
+    assert spy.saved["sent_date"] == "2026-06-01"
+
+
+def test_send1_defers_when_not_all_ready(monkeypatch):
+    cache = _full_cache()
+    cache["restaurants"]["C"]["menus"] = {}  # C not ready
+    spy, sent = _setup_send(monkeypatch, cache)
+    assert gd.send_daily_message(final=False, today=MONDAY) is True
+    assert sent["called"] is False          # did not post
+    assert spy.saved is None                # did not mark sent
+
+
+def test_send2_posts_partial(monkeypatch):
+    cache = _full_cache()
+    cache["restaurants"]["C"]["menus"] = {}  # only A,B ready
+    spy, sent = _setup_send(monkeypatch, cache)
+    assert gd.send_daily_message(final=True, today=MONDAY) is True
+    assert sent["called"] is True
+    assert spy.saved["sent_date"] == "2026-06-01"
+
+
+def test_send2_skips_when_all_empty(monkeypatch):
+    cache = {"week_start": "2026-06-01", "restaurants": {}}
+    spy, sent = _setup_send(monkeypatch, cache)
+    assert gd.send_daily_message(final=True, today=MONDAY) is True
+    assert sent["called"] is False
+    assert spy.saved is None
+
+
+def test_already_sent_is_skipped(monkeypatch):
+    cache = _full_cache()
+    cache["sent_date"] = "2026-06-01"
+    spy, sent = _setup_send(monkeypatch, cache)
+    assert gd.send_daily_message(final=True, today=MONDAY) is True
+    assert sent["called"] is False
+
+
+def test_weekend_is_skipped(monkeypatch):
+    spy, sent = _setup_send(monkeypatch, _full_cache())
+    saturday = date(2026, 6, 6)
+    assert gd.send_daily_message(final=True, today=saturday) is True
+    assert sent["called"] is False
+
+
+def test_slack_failure_does_not_mark_sent(monkeypatch):
+    spy, sent = _setup_send(monkeypatch, _full_cache(), slack_result=False)
+    assert gd.send_daily_message(final=False, today=MONDAY) is False
+    assert spy.saved is None                # not marked sent on failure
