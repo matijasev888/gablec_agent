@@ -499,6 +499,24 @@ def scrape_and_process():
     print("=" * 60)
 
 
+def decide_send_action(ready_count: int, total: int, final: bool, already_sent: bool) -> str:
+    """Pure decision for the send phase.
+
+    Returns one of:
+      'skip_sent'  - already posted today, do nothing
+      'defer'      - Send #1 and not all restaurants ready yet; wait for the deadline
+      'skip_empty' - Send #2 (deadline) but nothing to post
+      'post'       - go ahead and post to Slack
+    """
+    if already_sent:
+        return "skip_sent"
+    if not final:
+        # Send #1 (08:00 target): only post a complete menu.
+        return "post" if ready_count >= total else "defer"
+    # Send #2 (09:30 deadline): post whatever we have, but never an all-empty message.
+    return "post" if ready_count >= 1 else "skip_empty"
+
+
 def send_daily_message():
     """
     Phase 2: Send Slack message with today's menus from cache.
