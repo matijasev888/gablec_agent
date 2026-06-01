@@ -1,0 +1,108 @@
+{
+  "week_start": "2026-06-01",
+  "restaurants": {
+    "Restoran-Catering Zaboky": {
+      "facebook_url": "https://www.facebook.com/p/Restoran-Catering-Zaboky-100063838081316/",
+      "last_scrape": "2026-06-01T14:12:45.753905+02:00",
+      "menu_type": "weekly",
+      "menus": {
+        "2026-06-01": [
+          "Varivo s mesom i gljivama 8,00 E",
+          "Pureći sote, tjestenina, salata 9,20 E",
+          "Svinjski bečki, restani krumpir, salata 8,90 E",
+          "Teleća kalja 9,90 E"
+        ],
+        "2026-06-02": [
+          "Ričet s kobasom, 8,60 E",
+          "Pohana pileća krilca, mlinci, salata 9,80 E",
+          "Teleći paprikaš, pire krumpir, salata 9,20 E",
+          "Teleća kalja 9,90 E"
+        ],
+        "2026-06-03": [
+          "Kelj varivo,arsko meso 8,50 E",
+          "Pureći zagrebački, dinstane mahune, salata 9,90 E",
+          "Vratina s žarom, zapečeni grah, salata 8,60 E",
+          "Teleća kalja 9,90 E"
+        ],
+        "2026-06-04": [
+          "Juneći gulaš s noklecima 9,20 E",
+          "Pileći bečki, krpice sa zeljem, salata 8,80 E",
+          "Svinjske rolice sa žara, povrće na lešo, salata 8,90 E",
+          "Teleća kalja 9,90 E"
+        ],
+        "2026-06-05": [
+          "Pržene lignje, pomfrit, tartar 9,90 E",
+          "Hobotnica peka, krumpir i povrće, salata 9,80 E",
+          "Tjestenina sa lososom, salata 9,80 E",
+          "Piletina u umaku od šampinjona, slani krumpir, salata 8,70 E",
+          "Teleća kalja 9,90 E"
+        ]
+      }
+    },
+    "Restaurant \"Grašo\"": {
+      "facebook_url": "https://www.facebook.com/p/Restaurant-Gra%C5%A1o-100055053834186/",
+      "last_scrape": "2026-06-01T14:12:45.753905+02:00",
+      "menu_type": "weekly",
+      "menus": {
+        "2026-06-01": [
+          "VOJNIČKI GRAH (7,90 €)",
+          "PEČENA PILETINA, MLINCI, CIKLA (7,70 €)",
+          "POHANI KOTLET, DUVED RIŽA, SALATA (7,60 €)",
+          "SVINJSKI PAPRIKAŠ, TIJESTO, SALATA (7,30 €)",
+          "PUNJENA PLJESKAVICA, POMMES, LUK (6,50 €)"
+        ],
+        "2026-06-02": [
+          "PILEĆI NARAVNI U UMAKU OD ŠAMPINJONA, TIJESTO, SALATA (7,70 €)",
+          "MAĐARSKI GULAŠ (7,60 €)",
+          "SVINJSKO PEČENJE, SELJAČKI KRUMPIR, SALATA (6,90 €)",
+          "SVINJSKI BEČKI, POMMES, TARTAR (6,80 €)",
+          "MIX MESO (ćevapi, pečenica, carsko meso), POMMES, LUK (6,60 €)"
+        ],
+        "2026-06-03": [
+          "JUNEĆI PAPRIKAŠ, DOMAĆI NJOKI, SALATA (9,30 €)",
+          "FILEKI (7,90 €)",
+          "TORTILJA (pohana piletina, povrće, umak) + POMMES (7,70 €)",
+          "MESNA ŠTRUCA, PIRE KRUMPIR, UMAK OD ŠPINATA (7,70 €)",
+          "HAMBURGER + POMMES (7,40 €)"
+        ],
+        "2026-06-05": [
+          "PRŽENE LIGNJE, POMMES, TARTAR (9,30 €)",
+          "POHANI OSLIĆ, KRUMPIR SALATA (7,70 €)",
+          "RIŽOTO OD PILETINE, SALATA (7,50 €)",
+          "VARIVO OD POVRĆA + KOBASICA (6,50 €)",
+          "PAPALINE, POMMES, LUK (6,40 €)"
+        ]
+      }
+    },
+    "Mondo pizzeria": {
+      "facebook_url": "https://www.facebook.com/mondozabok/",
+      "last_scrape": "2026-06-01T14:12:45.753905+02:00",
+      "menu_type": "weekly",
+      "menus": {
+        "2026-06-01": [
+          "Spaghetti bolognese + salata (7,50 €)",
+          "Pileći bečki s duvec rižom (7,80 €)",
+          "Bečki s pomfritom + salata (7,50 €)",
+          "Pizza (7,50 €)"
+        ],
+        "2026-06-02": [
+          "Varivo grah s ričetom i kobasicom (7,30 €)",
+          "Mesna štruca \"MONDO\" s pekarskim krumpirom + salata (7,50 €)",
+          "Bečki s pomfritom + salata (7,50 €)",
+          "Pizza (7,50 €)"
+        ],
+        "2026-06-03": [
+          "Špinat s pire krumpirom i faširancem (7,60 €)",
+          "Lungić u umaku od zelenog papra s njokima + salata (8,00 €)",
+          "Bečki s pomfritom + salata (7,50 €)",
+          "Pizza (7,50 €)"
+        ],
+        "2026-06-05": [
+          "Čevapi u lepinji s ajvarom i lukom (7,80 €)",
+          "Pržene lignje s pomfritom + salata (9,80 €)",
+          "Pizza (7,50 €)"
+        ]
+      }
+    }
+  }
+}
