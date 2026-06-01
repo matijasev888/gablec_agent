@@ -568,7 +568,7 @@ def send_daily_message(final: bool = False, today: date | None = None) -> bool:
     Returns False only on an actual Slack send failure.
     """
     now_local = datetime.now(TZ)
-    today_local = today or now_local.date()
+    today_local = today if today is not None else now_local.date()
     today_str = today_local.isoformat()
 
     label = "Send #2 (deadline)" if final else "Send #1"
@@ -581,10 +581,6 @@ def send_daily_message(final: bool = False, today: date | None = None) -> bool:
         return True
 
     cache = load_cache()
-
-    if cache.get("sent_date") == today_str:
-        print(f"Already sent today ({today_str}) - skipping.")
-        return True
 
     if not is_cache_valid_for_week(cache, today_local):
         print("WARNING: Cache is from a different week!")
@@ -599,8 +595,12 @@ def send_daily_message(final: bool = False, today: date | None = None) -> bool:
         print(f"  {name}: {status}")
     print(f"Ready: {ready_count}/{total}")
 
-    action = decide_send_action(ready_count, total, final, already_sent=False)
+    already_sent = cache.get("sent_date") == today_str
+    action = decide_send_action(ready_count, total, final, already_sent=already_sent)
 
+    if action == "skip_sent":
+        print(f"Already sent today ({today_str}) - skipping.")
+        return True
     if action == "defer":
         print(f"Only {ready_count}/{total} ready - deferring to the 09:30 deadline send.")
         return True

@@ -1,5 +1,6 @@
 import pytest
 import gablec_daily as gd
+from datetime import date
 
 
 @pytest.mark.parametrize("ready,total,final,already_sent,expected", [
@@ -17,9 +18,6 @@ import gablec_daily as gd
 ])
 def test_decide_send_action(ready, total, final, already_sent, expected):
     assert gd.decide_send_action(ready, total, final, already_sent) == expected
-
-
-from datetime import date
 
 
 def _cache_with(menus_by_url):
