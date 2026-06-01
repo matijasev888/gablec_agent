@@ -13,9 +13,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Gablec Bot - Daily Lunch Menu for Slack")
     parser.add_argument(
         "--mode",
-        choices=["scrape", "send", "full"],
+        choices=["scrape", "send", "send-final", "full"],
         default="full",
-        help="Run mode: 'scrape' for fetching/processing, 'send' for Slack message, 'full' for both"
+        help="Run mode: 'scrape' fetch/process, 'send' early send (all ready), "
+             "'send-final' deadline send (partial ok), 'full' for both"
     )
     args = parser.parse_args()
     
@@ -45,7 +46,7 @@ if __name__ == "__main__":
             missing.append("APIFY_TOKEN")
         if not google_api_key:
             missing.append("GOOGLE_API_KEY")
-    if args.mode in ["send", "full"]:
+    if args.mode in ["send", "send-final", "full"]:
         if not slack_bot_token:
             missing.append("SLACK_BOT_TOKEN")
     
@@ -63,11 +64,11 @@ if __name__ == "__main__":
             print("SUCCESS! Scrape and process complete.")
             print("=" * 60)
             sys.exit(0)
-        elif args.mode == "send":
-            success = send_daily_message()
+        elif args.mode in ("send", "send-final"):
+            success = send_daily_message(final=(args.mode == "send-final"))
             if success:
                 print("\n" + "=" * 60)
-                print("SUCCESS! Lunch menus posted to Slack.")
+                print("Send phase complete.")
                 print("=" * 60)
                 sys.exit(0)
             else:
