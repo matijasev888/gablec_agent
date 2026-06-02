@@ -1,15 +1,9 @@
 name: daily-lunch-bot
 
 on:
-  schedule:
-    # Times are UTC. Zagreb summer = UTC+2 (winter UTC+1, so one hour earlier).
-    - cron: "30 4 * * 1-5"   # ~06:30 local - scrape
-    - cron: "0 5 * * 1-5"    # ~07:00 local - scrape
-    - cron: "30 5 * * 1-5"   # ~07:30 local - scrape
-    - cron: "0 6 * * 1-5"    # ~08:00 local - SEND #1 (post if all ready)
-    - cron: "30 6 * * 1-5"   # ~08:30 local - scrape
-    - cron: "0 7 * * 1-5"    # ~09:00 local - scrape
-    - cron: "30 7 * * 1-5"   # ~09:30 local - SEND #2 (deadline, partial ok)
+  # No 'schedule:' trigger — GitHub's cron is unreliable (delayed/dropped).
+  # An external scheduler (cron-job.org) calls this via workflow_dispatch
+  # at ~08:00 local with mode=full (scrape-with-retries + post in one run).
   workflow_dispatch:
     inputs:
       mode:
