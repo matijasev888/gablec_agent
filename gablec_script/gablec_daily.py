@@ -357,41 +357,58 @@ def send_to_slack(today_lunch: dict, today_date: date, max_retries: int = 3) -> 
     return False
 
 
-def fetch_facebook_posts(page_url: str, since_date: date) -> list:
-    """Fetch posts from a Facebook page using Apify."""
-    try:
-        run = client_apify.actor("apify/facebook-posts-scraper").call(run_input={
-            "startUrls": [{"url": page_url}],
-            "proxy": {"apifyProxyGroups": ["RESIDENTIAL"]},
-            "maxRequestRetries": 10,
-            "onlyPostsNewerThan": since_date.isoformat(),
-            "resultsLimit": 10
-        })
-        
-        dataset = client_apify.dataset(run["defaultDatasetId"])
-        page_out = []
-        
-        for item in dataset.iterate_items():
-            page_name = item.get("user", {}).get("name")
-            text = item.get("text")
-            post_url = item.get("topLevelUrl") or item.get("url") or item.get("facebookUrl")
-            posted_local = to_local(item.get("time"))
-            images = download_all_images(item.get("media", []))
-            
-            page_out.append({
-                "page_name": page_name,
-                "text": text,
-                "posted_at_local": posted_local.isoformat(),
-                "post_url": post_url,
-                "images": images
+def fetch_facebook_posts(page_url: str, since_date: date, retries: int = 3, retry_delay: int = 20) -> list:
+    """Fetch posts from a Facebook page using Apify.
+
+    The Apify Facebook scraper intermittently returns an EMPTY dataset even
+    when posts exist (the residential proxy IP gets soft-blocked, so the page
+    'succeeds' but the feed comes back empty). Retry a few times on an empty
+    result — each run gets a fresh proxy IP, so a retry usually succeeds.
+    """
+    for attempt in range(1, retries + 1):
+        try:
+            run = client_apify.actor("apify/facebook-posts-scraper").call(run_input={
+                "startUrls": [{"url": page_url}],
+                "proxy": {"apifyProxyGroups": ["RESIDENTIAL"]},
+                "maxRequestRetries": 10,
+                "onlyPostsNewerThan": since_date.isoformat(),
+                "resultsLimit": 10
             })
-        
-        page_out.sort(key=lambda x: x["posted_at_local"], reverse=True)
-        return page_out
-        
-    except Exception as e:
-        print(f"Error fetching {page_url}: {e}")
-        return []
+
+            dataset = client_apify.dataset(run["defaultDatasetId"])
+            page_out = []
+
+            for item in dataset.iterate_items():
+                page_name = item.get("user", {}).get("name")
+                text = item.get("text")
+                post_url = item.get("topLevelUrl") or item.get("url") or item.get("facebookUrl")
+                posted_local = to_local(item.get("time"))
+                images = download_all_images(item.get("media", []))
+
+                page_out.append({
+                    "page_name": page_name,
+                    "text": text,
+                    "posted_at_local": posted_local.isoformat(),
+                    "post_url": post_url,
+                    "images": images
+                })
+
+            page_out.sort(key=lambda x: x["posted_at_local"], reverse=True)
+
+            if page_out:
+                return page_out
+
+            # Empty result — likely a flaky scrape. Retry with a fresh proxy IP.
+            if attempt < retries:
+                print(f"  0 posts (attempt {attempt}/{retries}); retrying in {retry_delay}s...")
+                time.sleep(retry_delay)
+
+        except Exception as e:
+            print(f"Error fetching {page_url} (attempt {attempt}/{retries}): {e}")
+            if attempt < retries:
+                time.sleep(retry_delay)
+
+    return []
 
 
 def scrape_and_process():
@@ -621,10 +638,13 @@ def send_daily_message(final: bool = False, today: date | None = None) -> bool:
 
 def main():
     """
-    Main entry point - runs both phases (for backward compatibility and manual runs).
+    Main entry point - runs both phases in one shot (for a single daily trigger).
+
+    Uses the deadline send (final=True) so one run posts whatever menus are
+    ready instead of deferring when a restaurant is missing.
     """
     scrape_and_process()
-    return send_daily_message()
+    return send_daily_message(final=True)
 
 
 if __name__ == "__main__":
