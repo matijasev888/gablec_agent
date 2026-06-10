@@ -375,7 +375,9 @@ def fetch_facebook_posts(page_url: str, since_date: date, retries: int = 3, retr
                 "resultsLimit": 10
             })
 
-            dataset = client_apify.dataset(run["defaultDatasetId"])
+            # apify-client 3.x returns a typed `Run` object (not a dict), so
+            # read the dataset id via attribute access, not subscripting.
+            dataset = client_apify.dataset(run.default_dataset_id)
             page_out = []
 
             for item in dataset.iterate_items():

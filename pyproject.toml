@@ -5,7 +5,7 @@ description = "Daily lunch menu bot for Slack - scrapes Facebook restaurants and
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "apify-client>=2.2.1",
+    "apify-client>=3.0.2,<4",
     "google-genai>=1.46.0",
     "httpx>=0.27.0",
     "python-dotenv>=1.2.1",

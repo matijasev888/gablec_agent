@@ -1,6 +1,50 @@
+import types
 import pytest
 import gablec_daily as gd
 from datetime import date
+
+
+def test_fetch_facebook_posts_reads_dataset_id_as_attribute(monkeypatch):
+    """Regression: apify-client 3.x returns a typed `Run` object, not a dict.
+
+    Subscripting it (`run["defaultDatasetId"]`) raises 'Run' object is not
+    subscriptable, which the broad except swallows -> every scrape returns [],
+    the run still exits 0, and the bot silently posts nothing. The Run mock
+    here is a SimpleNamespace (not subscriptable), so it mimics that contract:
+    this test fails on the old code and passes once we use attribute access.
+    """
+    captured = {}
+
+    class _Actor:
+        def call(self, run_input):
+            return types.SimpleNamespace(default_dataset_id="ds-123")
+
+    class _Dataset:
+        def iterate_items(self):
+            return [{
+                "user": {"name": "Resto"},
+                "text": "Marenda: juha, segedin",
+                "topLevelUrl": "https://fb/post/1",
+                "time": "2026-06-10T06:00:00Z",
+                "media": [],
+            }]
+
+    class _Client:
+        def actor(self, _name):
+            return _Actor()
+
+        def dataset(self, dataset_id):
+            captured["dataset_id"] = dataset_id
+            return _Dataset()
+
+    monkeypatch.setattr(gd, "client_apify", _Client())
+
+    posts = gd.fetch_facebook_posts("https://fb/page", date(2026, 6, 6))
+
+    assert captured["dataset_id"] == "ds-123"
+    assert len(posts) == 1
+    assert posts[0]["page_name"] == "Resto"
+    assert posts[0]["text"] == "Marenda: juha, segedin"
 
 
 @pytest.mark.parametrize("ready,total,final,already_sent,expected", [
