@@ -196,8 +196,12 @@ def ask_gemini_for_weekly_menu(page_name: str, posts_data: list, today_date: dat
           f"text={text_size/1024:.1f}KB, images={total_image_bytes/1024/1024:.1f}MB, "
           f"total={( text_size + total_image_bytes)/1024/1024:.1f}MB")
 
-    # Try models in order — switch immediately on failure
-    models_to_try = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"]
+    # Try models in order — switch immediately on failure.
+    # Verified working on the free tier 2026-06-10 (see gemini_probe.py):
+    # 2.5-flash (quality) -> 3.1-flash-lite -> 2.5-flash-lite (fastest).
+    # Dropped gemini-2.0-flash/-lite and 2.5-pro: they return 429 (no free
+    # quota). 3.5-flash / 3-flash-preview exist but are often 503-overloaded.
+    models_to_try = ["gemini-2.5-flash", "gemini-3.1-flash-lite", "gemini-2.5-flash-lite"]
     resp = None
     for model_name in models_to_try:
         try:
