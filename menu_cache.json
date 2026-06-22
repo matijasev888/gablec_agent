@@ -1,123 +1,49 @@
 {
-  "week_start": "2026-06-15",
+  "week_start": "2026-06-22",
   "restaurants": {
     "Restoran-Catering Zaboky": {
       "facebook_url": "https://www.facebook.com/p/Restoran-Catering-Zaboky-100063838081316/",
-      "last_scrape": "2026-06-15T08:01:03.366122+02:00",
+      "last_scrape": "2026-06-22T08:00:53.651970+02:00",
       "menu_type": "weekly",
       "menus": {
-        "2026-06-15": [
-          "Slatko zelje s grahom, kuhana šunka (8,20 E)",
-          "Pureći bečki, riža s povrćem, salata (9,50 E)",
-          "Punjena paprika, pire krumpir, salata (8,90 E)",
-          "Teleća kalja (9,90 E)"
-        ],
-        "2026-06-16": [
-          "Grah s korijenjem i pužićima, carsko meso (8,80 E)",
-          "Pureći zagrebački, restani krumpir, salata (9,90 E)",
-          "Svinjski stroganoff, špagete, salata (8,80 E)",
-          "Teleća kalja (9,90 E)"
-        ],
-        "2026-06-17": [
-          "Poriluk varivo, faširanac (8,70 E)",
-          "Pečene roštiljke, zapečeni grah, ajvar i luk (8,30 E)",
-          "Pohani kotlet, pomfrit, salata (8,80 E)",
-          "Teleća kalja (9,90 E)"
-        ],
-        "2026-06-18": [
-          "Juneći gulaš sa krumpirom (9,20 E)",
-          "Pileće rolice, meksički pire, salata (8,90 E)",
-          "Lazanje, salata (8,90 E)",
-          "Teleća kalja (9,90 E)"
-        ],
-        "2026-06-19": [
-          "Pržene lignje, pomfrit, tartar (9,90 E)",
-          "Salata od hobotnice (8,00 E)",
-          "Pohani oslić, salata od krumpira, tartar (9,50 E)",
+        "2026-06-22": [
           "Pileći bečki, pomfrit, salata (8,80 E)",
+          "Svinjska šnicla sa žara, pomfrit, ajvar, salata (8,80 E)",
           "Teleća kalja (9,90 E)"
-        ]
-      }
-    },
-    "Restaurant \"Grašo\"": {
-      "facebook_url": "https://www.facebook.com/p/Restaurant-Gra%C5%A1o-100055053834186/",
-      "last_scrape": "2026-06-15T08:01:03.366122+02:00",
-      "menu_type": "weekly",
-      "menus": {
-        "2026-06-15": [
-          "VRATINA NA SELJAČKI, TIJESTO, SALATA (8,50 €)",
-          "VOJNIČKI GRAH (7,90 €)",
-          "TORTILJA (pohana piletina, povrće, umak) + POMMES (7,70 €)",
-          "KOTLET ZAPEČEN SA SIROM, KRUMPIR S POVRĆEM, SALATA (7,60 €)",
-          "PUNJENA PLJESKAVICA, POMMES, LUK (6,80 €)"
         ],
-        "2026-06-16": [
-          "MAĐARSKI GULAŠ (7,90 €)",
-          "PEČENA PILETINA, MLINCI, CIKLA (7,70 €)",
-          "ŠPAGETE BOLOGNESE, SALATA (7,30 €)",
-          "SVINJSKI BEČKI, POMMES, TARTAR (7,30 €)",
-          "MIX MESO (ćevapi, pečenica, carsko meso), POMMES, LUK (7,00 €)"
+        "2026-06-23": [
+          "Mahune varivo, kobasica (8,70 E)",
+          "Pohane palačinke, pomfrit, tartar (8,50 E)",
+          "Svinjska šnicla u umaku od šampinjona i šunke, tjestenina, salata (8,80 E)",
+          "Teleća kalja (9,90 E)"
         ],
-        "2026-06-17": [
-          "JUNEĆI PAPRIKAŠ, DOMAĆI NJOKI, SALATA (9,80 €)",
-          "MESNA ŠTRUCA, PIRE KRUMPIR, UMAK OD ŠPINATA (8,00 €)",
-          "FILEKI (7,90 €)",
-          "POHANA PILETINA U CORNFLAKSU, POMMES, HAMBI UMAK (7,80 €)",
-          "HAMBURGER + POMMES (7,40 €)"
+        "2026-06-24": [
+          "Sekeli gulaš, pire krumpir, salata (8,70 E)",
+          "Svinjske pohane rolice, povrće na lešo, salata (8,60 E)",
+          "Piletina u umaku od zelenog papra, penne tjestenina, salata (8,90 E)",
+          "Teleća kalja (9,90 E)"
         ],
-        "2026-06-18": [
-          "PILEĆI NARAVNI U UMAKU OD ŠAMPINJONA, TIJESTO, SALATA (8,10 €)",
-          "POHANE PALAČINKE (bolognese), POMMES, TARTAR (7,40 €)",
-          "SVINJSKO PEČENJE, SELJAČKI KRUMPIR, SALATA (7,40 €)",
-          "VARIVO OD POVRĆA + KOBASICA (6,80 €)",
-          "GURMANSKA PLJESKAVICA, POMMES, LUK (6,80 €)"
+        "2026-06-25": [
+          "Mađarski gulaš (8,50 E)",
+          "Pureći zagrebački, kroketi, salata (9,90 E)",
+          "Giros od svinjetine, pomfrit, ljuti umak (8,90 E)",
+          "Teleća kalja (9,90 E)"
         ],
-        "2026-06-19": [
-          "PRŽENE LIGNJE, POMMES, TARTAR (9,60 €)",
-          "POHANI OSLIĆ, KRUMPIR SALATA (7,80 €)",
-          "RIŽOTO OD PILETINE, SALATA (7,80 €)",
-          "RIČET VARIVO + PLJESKAVICA (6,90 €)",
-          "PAPALINE, POMMES, LUK (6,50 €)"
+        "2026-06-26": [
+          "Pržene lignje, pomfrit, tartar (9,90 E)",
+          "Brudet od hobotnice, palenta, salata (9,50 E)",
+          "Riblji tanjur (file lososa, pržene lignje), blitva s krumpirom, salata (9,90 E)",
+          "Pileći sa žara, pomfrit, tartar (8,80 E)",
+          "Teleća kalja (9,90 E)"
         ]
       }
     },
     "Mondo pizzeria": {
       "facebook_url": "https://www.facebook.com/mondozabok/",
-      "last_scrape": "2026-06-15T08:01:03.366122+02:00",
-      "menu_type": "weekly",
-      "menus": {
-        "2026-06-15": [
-          "Čufte s pire krumpirom + salata (7,50 €)",
-          "Lungić i povrće s roštilja (8,00 €)",
-          "Bečki s pomfritom + salata (7,50 €)",
-          "Pizza (7,50 €)"
-        ],
-        "2026-06-16": [
-          "Varivo grašak s noklecima i piletinom (7,40 €)",
-          "Vratina na lovački s rižom + salata (7,50 €)",
-          "Bečki s pomfritom + salata (7,50 €)",
-          "Pizza (7,50 €)"
-        ],
-        "2026-06-17": [
-          "Paprikaš s tjesteninom + salata (7,50 €)",
-          "Zagrebački s restanim krumpirom + salata (7,80 €)",
-          "Bečki s pomfritom + salata (7,50 €)",
-          "Pizza (7,50 €)"
-        ],
-        "2026-06-18": [
-          "Varivo kelj s faširancem (7,30 €)",
-          "Pileći ražnjići u panceti s ploškama krumpira + salata (8,00 €)",
-          "Bečki s pomfritom + salata (7,50 €)",
-          "Pizza (7,50 €)"
-        ],
-        "2026-06-19": [
-          "Rižoto s plodovima mora + salata (7,80 €)",
-          "Špikovana svinjetina s pekarskim krumpirom + salata (7,50 €)",
-          "Pržene lignje s pomfritom + salata (9,80 €)",
-          "Pizza (7,50 €)"
-        ]
-      }
+      "last_scrape": "2026-06-22T08:00:53.651970+02:00",
+      "menu_type": "none",
+      "menus": {}
     }
   },
-  "sent_date": "2026-06-19"
+  "sent_date": "2026-06-22"
 }
