@@ -83,10 +83,41 @@
     },
     "Mondo pizzeria": {
       "facebook_url": "https://www.facebook.com/mondozabok/",
-      "last_scrape": "2026-06-29T08:00:59.051213+02:00",
-      "menu_type": "none",
-      "menus": {}
+      "last_scrape": "2026-06-30T08:00:56.303883+02:00",
+      "menu_type": "weekly",
+      "menus": {
+        "2026-06-29": [
+          "Spaghetti bolognese + salata (7,50 €)",
+          "Pileći bečki u cornfleksu s carskim povrćem na maslacu (7,80 €)",
+          "Bečki s pomfritom + salata (7,50 €)",
+          "Pizza (7,80 €)"
+        ],
+        "2026-06-30": [
+          "Tortilje s piletinom i povrćem + umak (7,50 €)",
+          "Pileći file u bijelom umaku s njokima + salata (7,80 €)",
+          "Bečki s pomfritom + salata (7,50 €)",
+          "Pizza (7,80 €)"
+        ],
+        "2026-07-01": [
+          "Varivo kelj s faširancem (7,60 €)",
+          "Zagrebački s đuveč rižom (7,80 €)",
+          "Bečki s pomfritom + salata (7,50 €)",
+          "Pizza (7,80 €)"
+        ],
+        "2026-07-02": [
+          "Vinski gulaš (7,30 €)",
+          "Juneće šnicle na saft s pire krumpirom + salata (8,60 €)",
+          "Bečki s pomfritom + salata (7,50 €)",
+          "Pizza (7,80 €)"
+        ],
+        "2026-07-03": [
+          "Rižoto s lignjama + salata (7,80 €)",
+          "Pečena piletina s pekarskim krumpirom + salata (7,60 €)",
+          "Pržene lignje s pomfritom + salata (9,80 €)",
+          "Pizza (7,80 €)"
+        ]
+      }
     }
   },
-  "sent_date": "2026-06-29"
+  "sent_date": "2026-06-30"
 }
