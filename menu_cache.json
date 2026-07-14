@@ -79,7 +79,45 @@
           "Pizza (7,80 €)"
         ]
       }
+    },
+    "Restoran-Catering Zaboky": {
+      "facebook_url": "https://www.facebook.com/p/Restoran-Catering-Zaboky-100063838081316/",
+      "last_scrape": "2026-07-14T08:01:11.107969+02:00",
+      "menu_type": "weekly",
+      "menus": {
+        "2026-07-13": [
+          "Vinski gulaš (8,00 E)",
+          "Piletina na pariški, rizi bizi, salata (8,80 E)",
+          "Svinjska šnicla u umaku od pršuta i vina, tjestenina, salata (8,80 E)",
+          "Teleća kolja (9,90 E)"
+        ],
+        "2026-07-14": [
+          "Vojnički grah (8,50 E)",
+          "Svinjski zagrebački, riža s tikvicama, salata (9,80 E)",
+          "Punjena paprika, pire krumpir, salata (8,90 E)",
+          "Teleća kolja (9,90 E)"
+        ],
+        "2026-07-15": [
+          "Poriluk, faširanac (8,70 E)",
+          "Mix roštilj (kotlet, carsko, pileća krilca), đuveč riža, salata (8,90 E)",
+          "Pureći zagrebački, restani krumpir, salata (9,90 E)",
+          "Teleća kolja (9,90 E)"
+        ],
+        "2026-07-16": [
+          "Rižet varivo s kobasom (8,80 E)",
+          "Vratina sa žara, zapečeni grah, luk i ajvar (8,60 E)",
+          "Pohani kotlet, dinstane mahune, salata (8,80 E)",
+          "Teleća kolja (9,90 E)"
+        ],
+        "2026-07-17": [
+          "Pržene lignje, pomfrit, tartar (9,90 E)",
+          "Pohani oslić, krumpir salata, tartar (9,50 E)",
+          "Riblji tanjur (rižoto sa plodovima mora, file orade), blitva s krumpirom (9,90 E)",
+          "Svinjski bečki, pomfrit, salata (8,60 E)",
+          "Teleća kolja (9,90 E)"
+        ]
+      }
     }
   },
-  "sent_date": "2026-07-13"
+  "sent_date": "2026-07-14"
 }
