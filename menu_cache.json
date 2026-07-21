@@ -79,7 +79,45 @@
           "Pizza (7,80 €)"
         ]
       }
+    },
+    "Restoran-Catering Zaboky": {
+      "facebook_url": "https://www.facebook.com/p/Restoran-Catering-Zaboky-100063838081316/",
+      "last_scrape": "2026-07-21T08:01:01.221304+02:00",
+      "menu_type": "weekly",
+      "menus": {
+        "2026-07-20": [
+          "Proljetno varivo (8,80 E)",
+          "Svinjske pohane trakice, rizi bizi, salata (9,20 E)",
+          "Piletina u umaku od šampinjona, tjestenina, salata (9,20 E)",
+          "Teleća kalja (9,90 E)"
+        ],
+        "2026-07-21": [
+          "Kelj varivo, carsko meso (8,50 E)",
+          "Kotlet na samoborski, slani krumpir, salata (8,60 E)",
+          "Pureći bečki, mlinci, salata (9,00 E)",
+          "Teleća kalja (9,90 E)"
+        ],
+        "2026-07-22": [
+          "Čobanac (7,80 E)",
+          "Ćufte, pire krumpir, salata (8,90 E)",
+          "Svinjske pohane rolice, pomfrit, salata (9,20 E)",
+          "Teleća kalja (9,90 E)"
+        ],
+        "2026-07-23": [
+          "Špek fileki (8,60 E)",
+          "Svinjska šnicla na lovački, restani krumpir, salata (8,80 E)",
+          "Piletina u sezamu, povrće na lešo, salata (9,00 E)",
+          "Teleća kalja (9,90 E)"
+        ],
+        "2026-07-24": [
+          "Pržene lignje, pomfrit, tartar (9,90 E)",
+          "Gulaš od hobotnice (9,00 E)",
+          "Riblji tanjur (tjestenina s lososom, pohana orada), salata (9,90 E)",
+          "Pileći ražnjići, pomfrit, salata (8,70 E)",
+          "Teleća kalja (9,90 E)"
+        ]
+      }
     }
   },
-  "sent_date": "2026-07-20"
+  "sent_date": "2026-07-21"
 }
