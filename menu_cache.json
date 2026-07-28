@@ -3,9 +3,41 @@
   "restaurants": {
     "Restoran-Catering Zaboky": {
       "facebook_url": "https://www.facebook.com/p/Restoran-Catering-Zaboky-100063838081316/",
-      "last_scrape": "2026-07-27T08:01:04.381321+02:00",
-      "menu_type": "none",
-      "menus": {}
+      "last_scrape": "2026-07-28T08:01:05.361694+02:00",
+      "menu_type": "weekly",
+      "menus": {
+        "2026-07-27": [
+          "Slatko zelje s grahom, pljeskavica (8,20 E)",
+          "Piletina na pariški, pomfrit, salata (8,80 E)",
+          "Rižoto od teletine, salata (9,20 E)",
+          "Teleća kolja (9,90 E)"
+        ],
+        "2026-07-28": [
+          "Grah s korijenjem i puzicima, hrenovka (8,80 E)",
+          "Pureći stroganoff, tjestenina, salata (9,20 E)",
+          "Svinjski zagrebački, mlinci, salata (9,50 E)",
+          "Teleća kolja (9,90 E)"
+        ],
+        "2026-07-29": [
+          "Vinski gulaš (8,00 E)",
+          "Piletina sa žara, pire krumpir, umak od svježih krastavaca, salata (8,70 E)",
+          "Svinjsko pečenje, krumpir sa povrćem, salata (8,90 E)",
+          "Teleća kolja (9,90 E)"
+        ],
+        "2026-07-30": [
+          "Mahune varivo, kuhana šunka (8,70 E)",
+          "Juneći paprikaš, tjestenina, salata (9,20 E)",
+          "Puretina na ljubljanski, rižoto od gljiva, salata (9,20 E)",
+          "Teleća kolja (9,90 E)"
+        ],
+        "2026-07-31": [
+          "Pržene lignje, pomfrit, tartar (9,90 E)",
+          "Brudet od hobotnice, žganci, salata (9,00 E)",
+          "Pohani oslić, krumpir sa špinatom, tartar (9,50 E)",
+          "Pileći bečki, pomfrit, salata (8,80 E)",
+          "Teleća kolja (9,90 E)"
+        ]
+      }
     },
     "Restaurant \"Grašo\"": {
       "facebook_url": "https://www.facebook.com/p/Restaurant-Gra%C5%A1o-100055053834186/",
@@ -82,5 +114,5 @@
       }
     }
   },
-  "sent_date": "2026-07-27"
+  "sent_date": "2026-07-28"
 }
