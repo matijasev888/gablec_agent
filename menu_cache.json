@@ -78,7 +78,7 @@
     },
     "Mondo pizzeria": {
       "facebook_url": "https://www.facebook.com/mondozabok/",
-      "last_scrape": "2026-08-03T08:00:58.148881+02:00",
+      "last_scrape": "2026-08-05T08:01:00.882118+02:00",
       "menu_type": "weekly",
       "menus": {
         "2026-08-03": [
@@ -91,7 +91,9 @@
           "Otkoščeni batak/zabatak s roštilja s ploškama krumpira + salata (7,50 €)",
           "Bečki s pomfritom + salata (7,50 €)"
         ],
-        "2026-08-05": [],
+        "2026-08-05": [
+          "ZATVORENO"
+        ],
         "2026-08-06": [
           "Paprikaš s tjesteninom + salata (7,50 €)",
           "Zagrebački s rizi bizijem + salata (7,80 €)",
@@ -105,5 +107,5 @@
       }
     }
   },
-  "sent_date": "2026-08-04"
+  "sent_date": "2026-08-05"
 }
