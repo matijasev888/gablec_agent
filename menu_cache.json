@@ -41,9 +41,40 @@
     },
     "Restaurant \"Grašo\"": {
       "facebook_url": "https://www.facebook.com/p/Restaurant-Gra%C5%A1o-100055053834186/",
-      "last_scrape": "2026-08-24T08:01:00.004094+02:00",
-      "menu_type": "none",
-      "menus": {}
+      "last_scrape": "2026-08-25T08:00:58.118494+02:00",
+      "menu_type": "weekly",
+      "menus": {
+        "2026-08-24": [
+          "VOJNIČKI GRAH (8,00 €)",
+          "KOTLET ZAPEČEN SA SIROM, KRUMPIR S POVRĆEM, SALATA (7,70 €)",
+          "PILEĆI BATAK/ZABATAK (otkošteni) SA ŽARA, POMMES, LJUTI UMAK (7,30 €)",
+          "PUNJENA PLJESKAVICA, POMMES, LUK (6,90 €)"
+        ],
+        "2026-08-25": [
+          "KOTLOVINA (8,20 €)",
+          "POHANI PILEĆI ŠTAPIĆI U SEZAMU, KROKETI, TARTAR (7,70 €)",
+          "SVINJSKO PEČENJE, SELJAČKI KRUMPIR, SALATA (7,50 €)",
+          "MIX MESO (ćevapi, pečenica, carsko meso), POMMES, LUK (7,10 €)"
+        ],
+        "2026-08-26": [
+          "FILEKI (7,90 €)",
+          "FAŠIRANCI, KRPICE SA ZELJEM (7,80 €)",
+          "TORTILJA (pohana piletina, povrće, umak) + POMMES (7,70 €)",
+          "VRATINA SA ŽARA, KRUMPIR PLOŠKE, LUK (7,20 €)"
+        ],
+        "2026-08-27": [
+          "PILEĆI FILE SA ŽARA, PIRE KRUMPIR, UMAK OD ŠPINATA (8,10 €)",
+          "SVINJSKI BEČKI, POMMES, TARTAR (7,50 €)",
+          "VINSKI GULAŠ (6,90 €)",
+          "ZAGORSKA PLJESKAVICA, POMMES, LUK (6,90 €)"
+        ],
+        "2026-08-28": [
+          "PRŽENE LIGNJE, POMMES, TARTAR (9,90 €)",
+          "POHANI OSLIĆ, KRUMPIR SALATA (7,90 €)",
+          "KOTLET NA SELJAČKI, TIJESTO, SALATA (7,90 €)",
+          "PAPALINE, POMMES, LUK (6,50 €)"
+        ]
+      }
     },
     "Mondo pizzeria": {
       "facebook_url": "https://www.facebook.com/mondozabok/",
@@ -83,5 +114,5 @@
       }
     }
   },
-  "sent_date": "2026-08-24"
+  "sent_date": "2026-08-25"
 }
