@@ -85,10 +85,46 @@
     },
     "Mondo pizzeria": {
       "facebook_url": "https://www.facebook.com/mondozabok/",
-      "last_scrape": "2026-10-26T08:01:05.475170+01:00",
-      "menu_type": "none",
-      "menus": {}
+      "last_scrape": "2026-10-27T08:01:08.116078+01:00",
+      "menu_type": "weekly",
+      "menus": {
+        "2026-10-26": [
+          "Varivo grašak s piletinom i noklecima (7,50 €)",
+          "Punjeni pileći file s roštilja s ploškama krumpira + salata (7,80 €)",
+          "Spaghetti bolognese + salata (7,60 €)",
+          "Bečki s pomfritom + salata (7,70 €)",
+          "Pizza (7,80 €)"
+        ],
+        "2026-10-27": [
+          "Rižoto s piletinom i povrćem + salata (7,60 €)",
+          "Juneći šnicli na saft s pire krumpirom + salata (9,00 €)",
+          "Spaghetti bolognese + salata (7,60 €)",
+          "Bečki s pomfritom + salata (7,70 €)",
+          "Pizza (7,80 €)"
+        ],
+        "2026-10-28": [
+          "Varivo kelj s faširancem (7,40 €)",
+          "Zagrebački s đuveč rižom + salata (7,90 €)",
+          "Spaghetti bolognese + salata (7,60 €)",
+          "Bečki s pomfritom + salata (7,70 €)",
+          "Pizza (7,80 €)"
+        ],
+        "2026-10-29": [
+          "Sekeli gulaš s restanim krumpirom (7,50 €)",
+          "Pileći ražnjići u košuljici od pancete s kroketima + salata (8,00 €)",
+          "Spaghetti bolognese + salata (7,60 €)",
+          "Bečki s pomfritom + salata (7,70 €)",
+          "Pizza (7,80 €)"
+        ],
+        "2026-10-30": [
+          "Tjestenina s tunjevinom + salata (7,70 €)",
+          "Mesna štruca \"MONDO\" s pekarskim krumpirom + salata (7,60 €)",
+          "Pržene lignje s pomfritom + tartar (9,90 €)",
+          "Spaghetti bolognese + salata (7,60 €)",
+          "Pizza (7,80 €)"
+        ]
+      }
     }
   },
-  "sent_date": "2026-10-26"
+  "sent_date": "2026-10-27"
 }
