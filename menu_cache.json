@@ -41,9 +41,42 @@
     },
     "Restaurant \"Grašo\"": {
       "facebook_url": "https://www.facebook.com/p/Restaurant-Gra%C5%A1o-100055053834186/",
-      "last_scrape": "2026-11-16T08:01:09.712222+01:00",
-      "menu_type": "none",
-      "menus": {}
+      "last_scrape": "2026-11-17T08:01:05.300799+01:00",
+      "menu_type": "weekly",
+      "menus": {
+        "2026-11-16": [
+          "POHANI KOTLET, ĐUVEĐ RIŽA, SALATA (8,10 €)",
+          "VOJNIČKI GRAH (8,00 €)",
+          "KRVAVICE, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (7,90 €)",
+          "PILEĆI BATAK/ZABATAK (otkošteni) SA ŽARA, POMMES, LJUTI UMAK (7,30 €)",
+          "ZAGORSKA PLJESKAVICA, POMMES, LUK (6,90 €)"
+        ],
+        "2026-11-17": [
+          "BUNCEK, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (9,50 €)",
+          "KOTLOVINA (8,20 €)",
+          "POHANA PILETINA U CORNFLAKSU, POMMES, HAMBI UMAK (7,80 €)",
+          "PEČENA SVINJSKA REBRICA, SELJAČKI KRUMPIR, SALATA (7,50 €)",
+          "MIX MESO ( ćevapi, pečenica, carsko meso ), POMMES, LUK (7,10 €)"
+        ],
+        "2026-11-18": [
+          "PRAZNIK"
+        ],
+        "2026-11-19": [
+          "JUNEĆI PAPRIKAŠ, DOMAĆI NJOKI, SALATA (11,00 €)",
+          "BUNCEK, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (9,50 €)",
+          "SARMA, PIRE KRUMPIR (8,50 €)",
+          "TORTILJA ( pohana piletina, povrće, umak ) + POMMES (7,70 €)",
+          "PUNJENA PLJESKAVICA, POMMES, LUK (6,90 €)"
+        ],
+        "2026-11-20": [
+          "PRŽENE LIGNJE, POMMES, TARTAR (9,90 €)",
+          "RIŽOTO OD KOZICA (9,40 €)",
+          "PILEĆI NARAVNI U UMAKU OD ŠAMPINJONA, TIJESTO, SALATA (8,50 €)",
+          "POHANI OSLIĆ, POMMES, TARTAR (8,20 €)",
+          "PEČENICE, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (8,00 €)",
+          "PAPALINE, POMMES, LUK (6,50 €)"
+        ]
+      }
     },
     "Mondo pizzeria": {
       "facebook_url": "https://www.facebook.com/mondozabok/",
@@ -80,5 +113,5 @@
       }
     }
   },
-  "sent_date": "2026-11-16"
+  "sent_date": "2026-11-17"
 }
