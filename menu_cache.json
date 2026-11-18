@@ -80,7 +80,7 @@
     },
     "Mondo pizzeria": {
       "facebook_url": "https://www.facebook.com/mondozabok/",
-      "last_scrape": "2026-11-16T08:01:09.712222+01:00",
+      "last_scrape": "2026-11-18T08:01:08.233381+01:00",
       "menu_type": "weekly",
       "menus": {
         "2026-11-16": [
@@ -105,7 +105,7 @@
           "Pizza (7,80 €)"
         ],
         "2026-11-20": [
-          "Pohani file oslića s krumpir salatom (8,20 €)",
+          "Pohani file oslića s krumpirom salatom (8,20 €)",
           "Mesna štruca \"MONDO\" s pekarskim krumpirom + salata (7,60 €)",
           "Pržene lignje s pomfritom + tartar (9,90 €)",
           "Pizza (7,80 €)"
@@ -113,5 +113,5 @@
       }
     }
   },
-  "sent_date": "2026-11-17"
+  "sent_date": "2026-11-18"
 }
