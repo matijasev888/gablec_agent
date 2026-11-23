@@ -1,117 +1,90 @@
 {
-  "week_start": "2026-11-16",
+  "week_start": "2026-11-23",
   "restaurants": {
-    "Restoran-Catering Zaboky": {
-      "facebook_url": "https://www.facebook.com/p/Restoran-Catering-Zaboky-100063838081316/",
-      "last_scrape": "2026-11-16T08:01:09.712222+01:00",
-      "menu_type": "weekly",
-      "menus": {
-        "2026-11-16": [
-          "Gulaš od mesa i krumpira (8,90 €)",
-          "Pureći sa žara, mlinci, salata (9,10 €)",
-          "Svinjetina u umaku od zelenog papra, tjestenina, salata (9,40 €)",
-          "Teleća kalja (9,90 €)"
-        ],
-        "2026-11-17": [
-          "Sekeli gulaš, restani krumpir, salata (9,20 €)",
-          "Pileći bečki, riža, salata (9,10 €)",
-          "Kotlet sa žara, restani krumpir, salata (9,20 €)",
-          "Teleća kalja (9,90 €)"
-        ],
-        "2026-11-18": [
-          "Grah varivo s mesom i kobasama (8,90 €)",
-          "Pureći zagrebački, riža s povrćem, salata (9,90 €)",
-          "Svinjsko pečenje, restani krumpir, salata (9,20 €)",
-          "Teleća kalja (9,90 €)"
-        ],
-        "2026-11-19": [
-          "Mahune varivo, faširanac (8,90 €)",
-          "Kotlet na samoborski, slani krumpir, salata (9,20 €)",
-          "Piletina u sezamu, krpice sa zeljem, salata (9,30 €)",
-          "Teleća kalja (9,90 €)"
-        ],
-        "2026-11-20": [
-          "Pržene lignje, pomfrit, tartar (9,90 €)",
-          "Hobotnica ispod peke, krumpir s povrćem, salata (9,90 €)",
-          "Riblji tanjur (file orade, file lososa), blitva s krumpirom, salata (9,90 €)",
-          "Pileći bečki, pomfrit, salata (9,10 €)",
-          "Teleća kalja (9,90 €)"
-        ]
-      }
-    },
     "Restaurant \"Grašo\"": {
       "facebook_url": "https://www.facebook.com/p/Restaurant-Gra%C5%A1o-100055053834186/",
-      "last_scrape": "2026-11-17T08:01:05.300799+01:00",
+      "last_scrape": "2026-11-23T08:01:07.085021+01:00",
       "menu_type": "weekly",
       "menus": {
-        "2026-11-16": [
-          "POHANI KOTLET, ĐUVEĐ RIŽA, SALATA (8,10 €)",
-          "VOJNIČKI GRAH (8,00 €)",
+        "2026-11-23": [
           "KRVAVICE, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (7,90 €)",
-          "PILEĆI BATAK/ZABATAK (otkošteni) SA ŽARA, POMMES, LJUTI UMAK (7,30 €)",
-          "ZAGORSKA PLJESKAVICA, POMMES, LUK (6,90 €)"
-        ],
-        "2026-11-17": [
-          "BUNCEK, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (9,50 €)",
-          "KOTLOVINA (8,20 €)",
-          "POHANA PILETINA U CORNFLAKSU, POMMES, HAMBI UMAK (7,80 €)",
-          "PEČENA SVINJSKA REBRICA, SELJAČKI KRUMPIR, SALATA (7,50 €)",
-          "MIX MESO ( ćevapi, pečenica, carsko meso ), POMMES, LUK (7,10 €)"
-        ],
-        "2026-11-18": [
-          "PRAZNIK"
-        ],
-        "2026-11-19": [
-          "JUNEĆI PAPRIKAŠ, DOMAĆI NJOKI, SALATA (11,00 €)",
-          "BUNCEK, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (9,50 €)",
-          "SARMA, PIRE KRUMPIR (8,50 €)",
-          "TORTILJA ( pohana piletina, povrće, umak ) + POMMES (7,70 €)",
+          "PILEĆI PAPRIKAŠ, TIJESTO, SALATA (7,50 €)",
+          "SVINJSKI BEČKI, POMMES, TARTAR (7,50 €)",
+          "GRAH VARIVO + KOBASICA (7,40 €)",
           "PUNJENA PLJESKAVICA, POMMES, LUK (6,90 €)"
         ],
-        "2026-11-20": [
+        "2026-11-24": [
+          "BUNCEK, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (9,50 €)",
+          "MAĐARSKI GULAŠ (8,00 €)",
+          "POHANI PILEĆI ŠTAPIĆI U SEZAMU, POMMES, TARTAR (7,70 €)",
+          "ŠPAGETE BOLOGNESE, SALATA (7,40 €)",
+          "HAMBURGER + POMMES (7,40 €)"
+        ],
+        "2026-11-25": [
+          "SARMA, PIRE KRUMPIR (8,50 €)",
+          "FILEKI (7,90 €)",
+          "KRVAVICE, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (7,90 €)",
+          "PEČENA PILETINA, MLINCI, CIKLA (7,70 €)",
+          "VRATINA SA ŽARA, KRUMPIR PLOŠKE, LUK (7,20 €)"
+        ],
+        "2026-11-26": [
+          "JUNETINA STROGANOF, RIŽA, SALATA (11,00 €)",
+          "BUNCEK, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (9,50 €)",
+          "MESNA ŠTRUCA, PIRE KRUMPIR, UMAK OD ŠPINATA (8,00 €)",
+          "TORTILJA (piletina, povrće, umak) + POMMES (7,70 €)",
+          "GURMANSKA PLJESKAVICA, POMMES, LUK (6,90 €)"
+        ],
+        "2026-11-27": [
           "PRŽENE LIGNJE, POMMES, TARTAR (9,90 €)",
           "RIŽOTO OD KOZICA (9,40 €)",
-          "PILEĆI NARAVNI U UMAKU OD ŠAMPINJONA, TIJESTO, SALATA (8,50 €)",
-          "POHANI OSLIĆ, POMMES, TARTAR (8,20 €)",
+          "PILEĆI MEDALJONI U UMAKU OD POVRĆA, TIJESTO, SALATA (8,00 €)",
           "PEČENICE, RESTANI KRUMPIR, DINSTANO KISELO ZELJE (8,00 €)",
+          "POHANI OSLIĆ, KRUMPIR SALATA (7,90 €)",
           "PAPALINE, POMMES, LUK (6,50 €)"
         ]
       }
     },
     "Mondo pizzeria": {
       "facebook_url": "https://www.facebook.com/mondozabok/",
-      "last_scrape": "2026-11-18T08:01:08.233381+01:00",
+      "last_scrape": "2026-11-23T08:01:07.085021+01:00",
       "menu_type": "weekly",
       "menus": {
-        "2026-11-16": [
-          "Punjena paprika s pire krumpirom (7,80 €)",
-          "Pileći bečki u cornflexu s carskim povrćem na maslacu (7,80 €)",
+        "2026-11-23": [
+          "Varivo grašak s noklecima i piletinom (7,50 €)",
+          "Naravni u umaku od šampinjona s rižom + salata (7,70 €)",
           "Spaghetti bolognese + salata (7,60 €)",
           "Bečki s pomfritom + salata (7,70 €)",
           "Pizza (7,80 €)"
         ],
-        "2026-11-17": [
-          "Tortilje s povrćem i piletinom + umak (7,70 €)",
-          "Lungić u umaku od gljiva s domaćim njokima + salata (8,20 €)",
+        "2026-11-24": [
+          "Lasagne bolognese + salata (7,70 €)",
+          "Zagrebački s restanim krumpirom + salata (7,90 €)",
+          "Spaghetti bolognese + salata (7,60 €)",
+          "Bečki s restanim krumpirom + salata (7,70 €)",
+          "Pizza (7,80 €)"
+        ],
+        "2026-11-25": [
+          "Sarma s pire krumpirom (7,80 €)",
+          "Piletina na lovački s tjesteninom + salata (7,80 €)",
           "Spaghetti bolognese + salata (7,60 €)",
           "Bečki s pomfritom + salata (7,70 €)",
           "Pizza (7,80 €)"
         ],
-        "2026-11-19": [
-          "Varivo kelj s faširancem (7,40 €)",
-          "Pileće rolice s rizi bizijem + salata (8,20 €)",
+        "2026-11-26": [
+          "Varivo grah s ričetom i kobasicom (7,40 €)",
+          "Punjeni pileći file s roštilja s pomfritom + salata (7,80 €)",
           "Spaghetti bolognese + salata (7,60 €)",
           "Bečki s pomfritom + salata (7,70 €)",
           "Pizza (7,80 €)"
         ],
-        "2026-11-20": [
-          "Pohani file oslića s krumpirom salatom (8,20 €)",
-          "Mesna štruca \"MONDO\" s pekarskim krumpirom + salata (7,60 €)",
+        "2026-11-27": [
+          "Rižoto s plodovima mora + salata (8,00 €)",
+          "Špikovana svinjetina s pekarskim krumpirom + salata (7,60 €)",
           "Pržene lignje s pomfritom + tartar (9,90 €)",
           "Pizza (7,80 €)"
         ]
       }
     }
   },
-  "sent_date": "2026-11-20"
+  "sent_date": "2026-11-23"
 }
